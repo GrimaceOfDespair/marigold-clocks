@@ -20,7 +20,7 @@ jobs:
       - run: npm run build
         
       - name: Publish artifact
-        uses: actions/upload-pages-artifact
+        uses: actions/upload-pages-artifact@v1
         with: 
           path: dist    # At a minimum this job should upload artifacts using actions/upload-pages-artifact
 
