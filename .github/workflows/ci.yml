@@ -20,7 +20,7 @@ jobs:
       - run: npm run build
         
       - name: Publish artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with: 
           name: gh-pages
           path: dist    # At a minimum this job should upload artifacts using actions/upload-pages-artifact
@@ -45,4 +45,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v3
+          with:
+            name: gh-pages
+
