@@ -176,7 +176,7 @@ span {
   height: 15px;
   background: #666;
   left: 50%;
-  margin-left: -1px;
+  margin-left: -2px;
   transform-origin: 50% 150px;
 }
 
