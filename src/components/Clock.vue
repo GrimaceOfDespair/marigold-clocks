@@ -51,24 +51,22 @@ const time = ref('');
 
 function clock() {
   const
-    d = new Date(new Date().toLocaleString('en', { timeZone: props.timezone })),
-    h = d.getHours(),
-    m = d.getMinutes(),
-    s = d.getSeconds();
+    localDate = new Date(),
+    timezoneDate = new Date(localDate.toLocaleString('en-US', { timeZone: props.timezone })),
+    hours = timezoneDate.getHours(),
+    minutes = timezoneDate.getMinutes(),
+    seconds = timezoneDate.getSeconds();
         
-  hDeg.value = h * 30 + m * (360/720),
-  mDeg.value = m * 6 + s * (360/3600),
-  sDeg.value = s * 6;
-  day.value = weekday[d.getDay()];
-  date.value = d.toLocaleDateString("en-GB", {
+  hDeg.value = hours * 30 + minutes * (360/720),
+  mDeg.value = minutes * 6 + seconds * (360/3600),
+  sDeg.value = seconds * 6;
+  date.value = timezoneDate.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
-    day: "numeric",
-    timeZone: props.timezone,
-  })
-  time.value = d.toLocaleTimeString("en-GB", {
-    timeZone: props.timezone,
-  })
+    day: "numeric"
+  });
+  time.value = timezoneDate.toLocaleTimeString("en-US");
+  day.value = weekday[timezoneDate.getDay()];
 }
 
 setInterval(() => clock(), 100);
