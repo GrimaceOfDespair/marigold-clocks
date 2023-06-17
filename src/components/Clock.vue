@@ -26,9 +26,10 @@
 <script setup>
 import { ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   label: String,
-  flag: String
+  flag: String,
+  timezone: String,
 })
 
 const weekday = [
@@ -50,7 +51,7 @@ const time = ref('');
 
 function clock() {
   const
-    d = new Date(),
+    d = new Date(new Date().toLocaleString('en', { timeZone: props.timezone })),
     h = d.getHours(),
     m = d.getMinutes(),
     s = d.getSeconds();
@@ -61,10 +62,12 @@ function clock() {
   day.value = weekday[d.getDay()];
   date.value = d.toLocaleDateString("en-GB", {
     year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
+    month: "short",
+    day: "numeric",
+    timeZone: props.timezone,
   })
   time.value = d.toLocaleTimeString("en-GB", {
+    timeZone: props.timezone,
   })
 }
 
