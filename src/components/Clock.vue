@@ -1,27 +1,35 @@
 <template>
-  <div class="clock">
-    <div>
-      <div class="info date">{{ date }}</div>
-      <div class="info day">{{ day }}</div>
+  <div class="container">
+    <div class="clock">
+      <div>
+        <div class="info date">{{ time }}<br />{{ day }}<br />{{ date }}</div>
+        <div class="info label">{{ label }}</div>
+        <div class="flag"><span class="fi fib" :class="'fi-' + flag"></span></div>
+      </div>
+      <div class="dot"></div>
+      <div>
+        <div class="hand hour-hand" :style="{ transform: 'rotate(' + hDeg + 'deg)'}"></div>
+        <div class="hand minute-hand" :style="{ transform: 'rotate(' + mDeg + 'deg)'}"></div>
+        <div class="hand second-hand" :style="{ transform: 'rotate(' + sDeg + 'deg)'}"></div>
+      </div>
+      <div>
+        <span class="h3">3</span>
+        <span class="h6">6</span>
+        <span class="h9">9</span>
+        <span class="h12">12</span>
+      </div>
+      <div class="diallines" v-for="n in 60" :style="{ transform: 'rotate(' + 6 * (n - 1) + 'deg)' }"></div>
     </div>
-    <div class="dot"></div>
-    <div>
-      <div class="hand hour-hand" :style="{ transform: 'rotate(' + hDeg + 'deg)'}"></div>
-      <div class="hand minute-hand" :style="{ transform: 'rotate(' + mDeg + 'deg)'}"></div>
-      <div class="hand second-hand" :style="{ transform: 'rotate(' + sDeg + 'deg)'}"></div>
-    </div>
-    <div>
-      <span class="h3">3</span>
-      <span class="h6">6</span>
-      <span class="h9">9</span>
-      <span class="h12">12</span>
-    </div>
-    <div class="diallines" v-for="n in 60" :style="{ transform: 'rotate(' + 6 * (n - 1) + 'deg)' }"></div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+
+defineProps({
+  label: String,
+  flag: String
+})
 
 const weekday = [
   "Sunday",
@@ -38,6 +46,7 @@ const mDeg = ref(0);
 const sDeg = ref(0);
 const day = ref(weekday[0]);
 const date = ref('');
+const time = ref('');
 
 function clock() {
   const
@@ -55,16 +64,15 @@ function clock() {
     month: "2-digit",
     day: "2-digit",
   })
+  time.value = d.toLocaleTimeString("en-GB", {
+  })
 }
 
 setInterval(() => clock(), 100);
 
 </script>
 
-<style>
-* {
-  box-sizing: content-box;
-}
+<style scoped>
 
 .clock {
   background: #ececec;
@@ -174,33 +182,46 @@ span {
   height: 25px;
 }
 
+.flag {
+  position: absolute;
+  top: 180px;
+  height: 20px;
+  width: 30px;
+  margin-left: -15px;
+  z-index: 3;
+  left: 50%;
+}
+
 .info {
   position: absolute;
-  width: 120px;
-  height: 20px;
   border-radius: 7px;
-  background: #ccc;
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-bottom-color: #eee;
+  border-right-color: #eee;
   text-align: center;
   line-height: 20px;
-  color: #000;
+  color: #444;
   font-size: 11px;
-  top: 200px;
-  left: 50%;
   margin-left: -60px;
-  font-family: "Poiret One";
-  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
   z-index: 3;
   letter-spacing: 3px;
-  margin-left: -60px;
   left: 50%;
 }
 
 .date {
-  top: 80px;
+  margin-left: -70px;
+  top: 70px;
+  width: 140px;
+  height: 60px;
 }
 
-.day {
-  top: 200px;
+.label {
+  margin-left: -70px;
+  top: 210px;
+  width: 140px;
+  height: 20px;
 }
 
 </style>
