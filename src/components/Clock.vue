@@ -75,6 +75,10 @@ setInterval(() => clock(), 100);
 
 <style scoped>
 
+.container {
+  zoom: .75;
+}
+
 .clock {
   background: #ececec;
   width: 300px;
