@@ -3,6 +3,7 @@ import Clock from './components/Clock.vue'
 </script>
 
 <template>
+  <Clock label="US West coast" flag="us" timezone="America/Los_Angeles" />
   <Clock label="US East coast" flag="us" timezone="America/New_York" />
   <Clock label="Belgium" flag="be" timezone="Europe/Brussels" />
   <Clock label="Australia" flag="au" timezone="Australia/Sydney" />
