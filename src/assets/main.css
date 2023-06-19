@@ -9,15 +9,11 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-align-content: center;
   align-content: center;
 }
 
 #app * {
-  -webkitx-flex: 1;
   flex: 1;
 }
