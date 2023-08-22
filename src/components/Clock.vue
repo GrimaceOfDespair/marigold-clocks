@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="clock">
+    <div class="clock" :style="{ backgroundColor: color }">
       <div>
         <div class="info date">{{ time }}<br />{{ day }}<br />{{ date }}</div>
         <div class="info label">{{ label }}</div>
@@ -30,6 +30,7 @@ const props = defineProps({
   label: String,
   flag: String,
   timezone: String,
+  color: String,
 })
 
 const weekday = [
@@ -48,6 +49,14 @@ const sDeg = ref(0);
 const day = ref(weekday[0]);
 const date = ref('');
 const time = ref('');
+const daylight = 0xEC;
+const night = 0x80;
+const color = ref(createColor(daylight));
+
+function createColor(intValue) {
+  const c = Math.round(intValue).toString(16);
+  return '#' + c + c + c;
+}
 
 function clock() {
   const
@@ -67,6 +76,9 @@ function clock() {
   });
   time.value = timezoneDate.toLocaleTimeString("en-US");
   day.value = weekday[timezoneDate.getDay()];
+
+  const lightness = 1 - (1 + Math.cos(hours / 12 * Math.PI)) / 2;
+  color.value = createColor(night + lightness * (daylight - night));
 }
 
 setInterval(() => clock(), 100);
@@ -80,7 +92,6 @@ setInterval(() => clock(), 100);
 }
 
 .clock {
-  background: #ececec;
   width: 300px;
   height: 300px;
   margin: 8% auto 0;
