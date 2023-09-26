@@ -6,7 +6,7 @@ import Clock from './components/Clock.vue'
   <Clock label="US West coast" flag="us" timezone="America/Los_Angeles" />
   <Clock label="US East coast" flag="us" timezone="America/New_York" />
   <Clock label="Europe" flag="eu" timezone="Europe/Brussels" />
-  <Clock label="India" flag="in" timezone="IST" />
+  <Clock label="India" flag="in" timezone="Asia/Kolkata" />
   <Clock label="Australia" flag="au" timezone="Australia/Sydney" />
   <Clock label="New Zealand" flag="nz" timezone="Pacific/Auckland" />
 </template>
